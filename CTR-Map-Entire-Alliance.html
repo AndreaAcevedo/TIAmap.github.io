@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content="initial-scale=1.0, user-scalable=no" name="viewport">
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Literata&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:700&display=swap" rel="stylesheet">
+
+	<style>
+	     /* Always set the map height explicitly to define the size of the div
+	      * element that contains the map. */
+	     #map {
+	       height: 100%;
+	     }
+	     /* Optional: Makes the sample page fill the window. */
+	     html, body {
+	       height: 100%;
+	       margin: 0;
+	       padding: 0;
+font-family: 'Roboto Slab', serif !important;
+color: #233244;
+	     }
+	     
+	     /*the below code is code I, Andy Acevedo made for the info windows*/
+       h1#firstHeading {
+    color: black;
+    padding:15px;
+  text-decoration: underline #FDBC33;
+  font-size: 35px;
+  margin-bottom: 1px;
+font-family: 'Poppins', sans-serif;
+
+}
+
+div#bodyContent {
+  padding: 15px;
+}
+	     .gm-style-iw.gm-style-iw-c {
+	background-color: #white;
+
+	}
+
+	.gm-style-iw-d {
+	 background-color: #white;
+	 
+	}
+	/*the following is for the scroll bar styling on the windowpops - make sure it matches the styling for the other aspects of the box above!x*/
+	.gm-style .gm-style-iw-d::-webkit-scrollbar-track, .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece {
+	 background-color: #white;
+	}
+  
+	h1#firstHeading a {
+ text-decoration: underline #FDBC33;
+  font-size: 35px;
+	color: black;
+}
+	
+  a{
+    text-decoration: underline #E05B2B;
+    color: #233244;
+   
+  }
+  a:hover{
+    color: #233244;
+    background-color: #FDBC33;
+     
+    
+  }
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+
+	     // This example displays a marker at the center of Australia.
+	     // When the user clicks the marker, an info window opens.
+	     // The maximum width of the info window is set to 200 pixels.
+
+	     function initMap() {
+	       
+	        var image = 'https://uploads-ssl.webflow.com/5d0d3167acec7aeffe71a888/5d2329127c6f2a6ec59cb7e8_logo--map-TIA.png';
+	       var middle ={
+	         lat:  31.438506,
+	         lng: -99.192137
+	         };
+	       var austin = {
+	   lat: 30.2747,
+	   lng: -97.7404
+	 };
+	 var dallas = {
+	   lat: 32.7767,
+	   lng: -96.7970
+	 };
+	 var sanAntonio = {
+	   lat: 29.4241,
+	   lng: -98.4936
+	 };
+	 var elPaso = {
+	   lat: 31.7619,
+	   lng: -106.485
+	 };
+	 var arlington = {
+	   lat: 32.7357,
+	   lng: -97.1081
+	 };
+	 var bryan = {
+	   lat: 30.6280,
+	   lng: -96.3344
+	 };
+	 var coastalBend = {
+	   lat: 27.8006,
+	   lng: -97.3964
+	 };
+	 var tarrantCounty = {
+	   lat: 32.7732,
+	   lng: -97.3517
+	 };
+	 var frisco = {
+	   lat: 33.1507,
+	   lng: -96.8236
+	 };
+	 var houston = {
+	   lat: 29.7604,
+	   lng: -95.3698
+	 };
+	       var map = new google.maps.Map(document.getElementById('map'), {
+	         zoom: 6,
+	         center: middle,
+	         styles: [
+	 {
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#212121"
+	     }
+	   ]
+	 },
+	 {
+	   "elementType": "labels.icon",
+	   "stylers": [
+	     {
+	       "visibility": "off"
+	     }
+	   ]
+	 },
+	 
+	 
+	 
+	 {
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#757575"
+	     }
+	   ]
+	 },
+	 {
+	   "elementType": "labels.text.stroke",
+	   "stylers": [
+	     {
+	       "color": "#212121"
+	     }
+	   ]
+	 },
+	/* {
+	   "featureType": "administrative",
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#757575"
+	     }
+	   ]
+	 },*/ /*disabling this to allow for the transit line properties*/
+	 {
+	   "featureType": "administrative.country",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#9e9e9e"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "administrative.land_parcel",
+	   "stylers": [
+	     {
+	       "visibility": "off"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "administrative.locality",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#bdbdbd"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "poi",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#757575"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "poi.park",
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#181818"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "poi.park",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#616161"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "poi.park",
+	   "elementType": "labels.text.stroke",
+	   "stylers": [
+	     {
+	       "color": "#1b1b1b"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "road",
+	   "elementType": "geometry.fill",
+	   "stylers": [
+	     {
+	       "color": "#2c2c2c"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "road",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#8a8a8a"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "road.arterial",
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#373737"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "road.highway",
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#3c3c3c"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "road.highway.controlled_access",
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#4e4e4e"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "road.local",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#616161"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "transit",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#757575"
+	     }
+	   ]
+	 },
+	 /*{
+    "featureType": "transit",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#DBE115"
+      }
+    ]
+  },*//*disabling this for now until transit is figured out*/
+	 {
+	   "featureType": "water",
+	   "elementType": "geometry",
+	   "stylers": [
+	     {
+	       "color": "#000000"
+	     }
+	   ]
+	 },
+	 {
+	   "featureType": "water",
+	   "elementType": "labels.text.fill",
+	   "stylers": [
+	     {
+	       "color": "#3d3d3d"
+	     }
+	   ]
+	 }
+	]
+	       });
+	       
+	       var transitLayer = new google.maps.TransitLayer();
+	 transitLayer.setMap(map);
+	 
+	 var austinContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">AUSTIN<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Team Austin<\/b>, Envisions a place of equity, economic opportunity, and environmental stewardship enabled by smart mobility transportation, and is developing innovative solutions to address the following challenges:' +
+             '<li><b>Limited Mobility<\/b> - Congestion with limited ability to expand right of way.<\/li>'+
+             '<li><b>Transportation User Convience Experience<\/b> - Create a more effective, cost-saving, single payer system for all available mobility options (including parking) and use data to deliver real-time transportation network information to system users.<\/li><li>'+
+             '<b>Environmental<\/b> - Reduce carbon footprint, air pollution, and related impacts.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Austin page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var austinInfoWindow = new google.maps.InfoWindow({
+	         content: austinContentString,
+	         maxWidth: 400
+	       });
+
+	       var austinMarker = new google.maps.Marker({
+	         position: austin,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Austin'
+	       });
+	       austinMarker.addListener('click', function() {
+	         austinInfoWindow.open(map, austinMarker);
+	       });
+	       
+	       /* this is for arlington */
+	       var arlingtonContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">ARLINGTON<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Team Arlington<\/b>, Envisions a place where innovative transportain technologies can be introduced, tested, and deployed in various conditions to serve a range of mobility needs for a wide variety of users.' +
+             'To this end, we are developing creative solutions to address the following challenges: <li><b>Limited options<\/b> - expanding on demand rideshare services and integrating rideshare with autonomous services and with paratransit services.<\/li>'+
+             '<li><b>Market Uncertainty<\/b> - Identifying and testing transportation needs and markets that autonomous vehicles are suited to address.<\/li><li><b>Innovation Barriers<\/b> - Technical, operational , regulatory and other challengesassociated with rolling out innovative transportation technologies.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Team Arlington<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var arlingtonInfoWindow = new google.maps.InfoWindow({
+	         content: arlingtonContentString,
+	         maxWidth: 400
+	       });
+
+	       var arlingtonMarker = new google.maps.Marker({
+	         position: arlington,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Arlington'
+	       });
+	       arlingtonMarker.addListener('click', function() {
+	         arlingtonInfoWindow.open(map, arlingtonMarker);
+	       });
+	       /*this is for Dallas*/
+	       var dallasContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">DALLAS<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Dallas<\/b>, '+
+	           'Information TBD.<\/p>'+
+	           '<p><a href="">'+
+	           'Visit Team Dallas Page<\/a> <\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var dallasInfoWindow = new google.maps.InfoWindow({
+	         content: dallasContentString,
+	         maxWidth: 400
+	       });
+
+	       var dallasMarker = new google.maps.Marker({
+	         position: dallas,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Dallas'
+	       });
+	       dallasMarker.addListener('click', function() {
+	         dallasInfoWindow.open(map, dallasMarker);
+	       });
+	       /*this is for san antonio*/
+	       var sanAntonioContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">SAN ANTONIO<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Team San Antonio<\/b> envisions a connected, inclusive, safe, sustainable and resilient transportation system leading to high quality of life and is developing innovative solutions to addess the following challenges:' +
+             '<li><b>Rapid Population Growth<\/b> - San Antonio is projected to grow by an additional 1 million people by the year 2040, almost doubling in population, adding over 150 vehicles daily to the region<\/li>'+
+             '<li><b>Barriers to Alternative Transportation Choices<\/b> - Prevalence of highways and single family neighborhoods create auto centric city form and a discontinous road networks limiting multimodal access'+
+             'and isolating residents from alternative transportation choices.<\/li>'+
+             '<li><b>Air Quality Nonattainment<\/b> - In July 2018, the EPA designated the San Antonio area as a "nonattainment" area. Specifically, Bexar County fell just short of the NAAQS ozone standard.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives of this region and to find region specific contacts: <a href="Test Link">'+
+	           'Team San Antonio page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var sanAntonioInfoWindow = new google.maps.InfoWindow({
+	         content: sanAntonioContentString,
+	         maxWidth: 400
+	       });
+
+	       var sanAntonioMarker = new google.maps.Marker({
+	         position: sanAntonio,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'San Antonio'
+	       });
+	       sanAntonioMarker.addListener('click', function() {
+	         sanAntonioInfoWindow.open(map, sanAntonioMarker);
+	       });
+	       /*this map is for el paso*/
+	       var elPasoContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">EL PASO<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>El Paso<\/b> envisions a place with safe and beautiful neighborhoods, a vibrant regional economy and exceptional recreational, culturlal and educational opportunities and is developing innovative solutions to address the following challenges:' +
+             '<li><b>Integrated Technology<\/b> - TLeverage and expand the use of current and new technology to reduce inefficiencies, improve communications, enable data sharing and advance strategy deployment.<\/li>'+
+             '<li><b>Improving Economic Development<\/b> - Stimulate access and economic growth by activating transportation corridors through transit integration and corss border mobility.<\/li>'+
+             '<li><b>Linking Community to Critical Services<\/b> - Connect people to community assets and programs that support health, safety and quality of life.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Team El Paso page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var elPasoInfoWindow = new google.maps.InfoWindow({
+	         content: elPasoContentString,
+	         maxWidth: 400
+	       });
+
+	       var elPasoMarker = new google.maps.Marker({
+	         position: elPaso,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'El Paso'
+	       });
+	       elPasoMarker.addListener('click', function() {
+	         elPasoInfoWindow.open(map, elPasoMarker);
+	       });
+	       
+	       
+	       /*this map is for Houston*/
+	       var houstonContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">HOUSTON<\/h1>'+
+	          '<div id="bodyContent">'+
+	           '<p><b>Houston<\/b> envisions a place of seamless multi-modal mobility, access for all, safe travel and is developing innovative solutions to address the following challenges:' +
+             '<li><b>Encouraging Alternative Modes<\/b> - Creating more high capacity transit and other modes to encourage ride sharing,<\/li>'+
+             '<li><b>Improving safety<\/b> - Creating safer conditions for pedestrian, bycyclists and those with mobility challenges.<\/li>'+
+             '<li><b>Leveraging Data<\/b> - Providing real time information and data.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Team Houston page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var houstonInfoWindow = new google.maps.InfoWindow({
+	         content: houstonContentString,
+	         maxWidth: 400
+	       });
+
+	       var houstonMarker = new google.maps.Marker({
+	         position: houston,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Houston'
+	       });
+	       houstonMarker.addListener('click', function() {
+	         houstonInfoWindow.open(map, houstonMarker);
+	       });
+	       /*this next row is for Bryan*/
+	       
+	       var bryanContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">BRYAN & COLLEGE STATION<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Team Bryan/College Station<\/b>, Envisions a place where our transportation services enhance local quality of life by addressing the following challenges:' +
+             '<li><b>Access to Medical Care<\/b> - Congestion with limited ability to expand right of way.<\/li>'+
+             '<li><b>Integrating Traffic Management Information<\/b> - Create a more effective, cost-saving, single payer system for all available mobility options (including parking) and use data to deliver real-time transportation network information to system users.<\/li>'+
+             '<li><b>Improving Connectivity in the Urban Core<\/b> - Deploying autonomous vehicles in Downtown Bryan, and the emerging downtown district in College Station centered around the Texas A&M University (TAMU) flagship campus.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Bryan Station / College Station page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var bryanInfoWindow = new google.maps.InfoWindow({
+	         content: bryanContentString,
+	         maxWidth: 400
+	       });
+
+	       var bryanMarker = new google.maps.Marker({
+	         position: bryan,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Bryan / College Station'
+	       });
+	       bryanMarker.addListener('click', function() {
+	         bryanInfoWindow.open(map, bryanMarker);
+	       });
+	        /*this next row is for coastal bend*/
+	       
+	       var coastalBendContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">COASTAL BEND<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Team Coastal Bend<\/b> Envisions:' +
+             '<li><b>Mobility Options for All<\/b> - commitment to an integrated, multi-modal system that safely moves people of all ages and abilities.<\/li>'+
+             '<li><b>Healthy, Safe, Connected, and Diverse Neighborhoods<\/b> - Focusing on people-scaled, support a mix of land uses, and are connected to key destinations by a variety of models.<\/li>'+
+             '<li><b>Innovative Freight Management Solutions<\/b> - Supporting the continued growth of regional industry without unintended consequences for the transportation experience and quality of life in our communities.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Coastal Bend page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var coastalBendInfoWindow = new google.maps.InfoWindow({
+	         content: coastalBendContentString,
+	         maxWidth: 400
+	       });
+
+	       var coastalBendMarker = new google.maps.Marker({
+	         position: coastalBend,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Uluru (Ayers Rock)'
+	       });
+	       coastalBendMarker.addListener('click', function() {
+	         coastalBendInfoWindow.open(map, coastalBendMarker);
+	       });
+	       
+	         /*this next row is for frisco*/
+	       
+	       var friscoContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading"><a href="#">FRISCO<\/a><\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Frisco<\/b> envisions a place of fast-paced and responsible growth aligned with a commitment to transportation excellence; where government, transportation providers and corporate partners work together to deploy and normalize emerging transportation technology inititiatives' +
+             'including flexible affordable and sustainable mobility options that connect the City of Frisco to the DFW Metroplex' +
+             '<li><b>Optimizing the Power of Big Data<\/b> - Open data platforms provide opportunity for continous improvement; however, collecting and processing data to make informed decisions takes technical knowledge, increased overhead,'+
+             'and financial investment for technologies yet to be proven.<\/li>'+
+             '<li><b>Acceptance of Mobility Alternativest<\/b> - Frisco is a large city experiencing rapid growth and the associated traffic congestion coupled with a car-centric culture typical of suburban communities.<\/li>'+
+             '<li><b>Existing Infrastructure<\/b> - Preparing existing infrastructure for connected vehicle applications related to safety, mobility, and public appearance.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'Team Frisco page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var friscoInfoWindow = new google.maps.InfoWindow({
+	         content: friscoContentString,
+	         maxWidth: 400
+	       });
+
+	       var friscoMarker = new google.maps.Marker({
+	         position: frisco,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Frisco'
+	       });
+	       friscoMarker.addListener('click', function() {
+	         friscoInfoWindow.open(map, friscoMarker);
+	       });
+	        /*this next row is for DFW/tarrant county*/
+	       
+	       var tarrantCountyContentString = '<div id="content">'+
+	           '<div id="siteNotice">'+
+	           '<\/div>'+
+	           '<h1 id="firstHeading" class="firstHeading">DFW & TARRANT COUNTY<\/h1>'+
+	           '<div id="bodyContent">'+
+	           '<p><b>Team DFW (Tarrant County)<\/b> envisions a place wjere ommpvative mobility solutions are available to all citizens regardless of geographic boundaries so they can have access to jobs and wellness related services and is developing innovative solutions to address the following challenges:' +
+             '<li><b>Mobility Integration<\/b> - The need for a platform for multiple transportation providers that effectively provides wellness-related services inclusing physical health , behavioral and mental health, co-occuring disorders, chronic disease management and life sustaining and enriching activities in Tarrant County<\/li>'+
+             '<li><b>Complicated Boundaries<\/b> - Tarrant County Includes 41 cities, and current mobility policies and programs restrict ridership between cities.<\/li>'+
+             '<li><b>Affordability<\/b> - Lack of affordable, counywide transportation service options that can efficiently connect individuals with healthcare providers whether insured or not.<\/li><\/p>'+
+	           '<p>Click to read further on the ongoing and planned initiatives and to find city specific contacts: <a href="Test Link">'+
+	           'DFW (Tarrant County) page<\/a><\/p>'+
+	           '<\/div>'+
+	           '<\/div>';
+
+	       var tarrantCountyInfoWindow = new google.maps.InfoWindow({
+	         content: tarrantCountyContentString,
+	         maxWidth: 400
+	       });
+
+	       var tarrantCountyMarker = new google.maps.Marker({
+	         position: tarrantCounty,
+	         map: map,
+	         icon: image, /*this doesnt break it*/
+	         title: 'Tarrant County / DFW'
+	       });
+	       tarrantCountyMarker.addListener('click', function() {
+	         tarrantCountyInfoWindow.open(map, tarrantCountyMarker);
+	       });
+	     }
+	</script> 
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCu1KcgHjpr-yVE6YoLapo7kVoqpU6nb-8&callback=initMap">
+	</script>
+</body>
+</html>
